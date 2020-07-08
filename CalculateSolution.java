@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
+
 public class CalculateSolution {
     public static void main(String[] args) {
         Scanner scannerObj = new Scanner(System.in);
@@ -8,7 +9,7 @@ public class CalculateSolution {
         int testCases = scannerObj.nextInt();
 
         for (int i = 0; i < testCases; i++) {
-            System.out.println("Testcase " + (i + 1));
+            System.out.println("Testcase "+(i+1));
             System.out.println("Enter no of person : ");
             int noOfPerson = scannerObj.nextInt();
             int priceArray[] = new int[noOfPerson];
@@ -17,7 +18,7 @@ public class CalculateSolution {
                 priceArray[j] = scannerObj.nextInt();
             }
             int amount = calaculatePrice(priceArray, noOfPerson);
-            System.out.println("Amount for " + (i + 1) + " TestCase : " + amount);
+            System.out.println("Amount for "+ (i+1 ) +" TestCase : " + amount);
             System.out.println();
             System.out.println("*****************");
 
@@ -33,10 +34,17 @@ public class CalculateSolution {
             totalPrice = priceArray[1];
         } else {
             for (int i = noOfPerson - 1; i > 1; i -= 2) {
-                int minimum1 = priceArray[i] + priceArray[0] + 2 * priceArray[1];
-                int minimum2 = priceArray[i] + priceArray[i - 1] + 2 * priceArray[0];
-                totalPrice += Math.min(minimum1, minimum2);
+                if (i == 2) {
+                    totalPrice += priceArray[2] + priceArray[0];
+                } else {
+                    int minimum1 = priceArray[i] + priceArray[0] + 2 * priceArray[1];
+                    int minimum2 = priceArray[i] + priceArray[i - 1] + 2 * priceArray[0];
+                    totalPrice += Math.min(minimum1, minimum2);
+                }
             }
+
+            // Calculate the minimum price
+            // of the two cheapest person
             if (noOfPerson == 1) {
                 totalPrice += priceArray[0];
             } else {
